@@ -41,19 +41,13 @@ fi
 # Send the message to the Telegram
 #
 
-echo $WorkDirectory
 path=${path//\"/}
-echo $path
 
 body=""
 
-if [ -z "$path" ]; then
-  if [ -f "$path" ]; then
-    body=$(cat $WorkDirectory/$path)
-  fi
+if [ -f "$WorkDirectory/$path" ]; then
+  body=$(cat $WorkDirectory/$path)
 fi
-
-echo $body
 
 text="$(eval printf ${text} )"
 URL="https://api.telegram.org/bot${BOT_TOKEN}/sendMessage"
