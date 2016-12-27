@@ -21,7 +21,7 @@ cat > "$payload" <&0
 BOT_TOKEN=$(jq -r '(.source.bot_token // "")' < "$payload")
 CHAT_ID=$(jq '(.params.chat_id // "")' < "$payload")
 text="$(jq '(.params.text // "text is empty")' < "${payload}")"
-path="$(jq '(.params.path)' <"$payload")
+path=$(jq '(.params.path)' <"$payload")
 
 #
 # Check mandatory parameters
