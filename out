@@ -9,6 +9,7 @@ NC='\033[0m' # No Color
 exec 3>&1
 exec 1>&2
 
+WorkDirectory=$1
 # for jq
 PATH=/usr/local/bin:$PATH
 
@@ -40,13 +41,19 @@ fi
 # Send the message to the Telegram
 #
 
+echo $WorkDirectory
+path=${path//\"/}
+echo $path
+
 body=""
 
 if [ -z "$path" ]; then
   if [ -f "$path" ]; then
-    body=$(cat $path)
+    body=$(cat $WorkDirectory/$path)
   fi
 fi
+
+echo $body
 
 text="$(eval printf ${text} )"
 URL="https://api.telegram.org/bot${BOT_TOKEN}/sendMessage"
